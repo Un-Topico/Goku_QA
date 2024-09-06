@@ -130,14 +130,13 @@ function startQuiz() {
     
     loadQuestion();
     
-    // Aplicar el efecto de ocultamiento al botón de regresar
+    // Mover el botón de regresar fuera de la pantalla
     const goBackBtn = document.getElementById('go-back-btn');
-    goBackBtn.classList.add('hidden-with-animation');
+    goBackBtn.classList.add('hidden-offscreen');
     
-    // Esperar a que termine la animación y luego ocultar el botón
+    // Una vez que termine la animación, podemos ocultarlo completamente
     goBackBtn.addEventListener('transitionend', () => {
-        goBackBtn.classList.add('hidden'); // Ocultar completamente el botón
-        goBackBtn.classList.remove('hidden-with-animation'); // Eliminar la clase de animación
+        goBackBtn.style.display = 'none'; // Ocultar completamente el botón
     }, { once: true });
 }
 
@@ -145,14 +144,17 @@ function startQuiz() {
 function goBack() {
     document.getElementById('selection-container').classList.remove('hidden');
     document.getElementById('quiz-container').classList.add('hidden');
-    document.getElementById('go-back-btn').classList.remove('hidden'); // Mostrar el botón de regresar
+    
+    const goBackBtn = document.getElementById('go-back-btn');
+    goBackBtn.classList.remove('hidden-offscreen');
+    goBackBtn.classList.add('visible-onscreen');
 }
 
 // Función para cargar la siguiente pregunta
 function loadQuestion() {
     const imageElement = document.getElementById('question-image');
     imageElement.style.opacity = 0; // Comienza con la imagen oculta
-    
+
     if (currentQuestionIndex < selectedQuestions.length) {
         const questionData = selectedQuestions[currentQuestionIndex];
         document.getElementById('question').innerText = questionData.question;
@@ -172,7 +174,7 @@ function loadQuestion() {
             col.className = colClass;
 
             const button = document.createElement('button');
-            button.className = 'option btn-block';
+            button.className = `option btn-block option-${index + 1}`; // Asignar clase según el índice
             button.innerText = option;
             button.onclick = () => checkAnswer(index);
 

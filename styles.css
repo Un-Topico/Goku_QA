@@ -1,7 +1,3 @@
-.hidden {
-    display: none;
-}
-
 body {
     font-family: Arial, sans-serif;
     background-color: #f4f4f4;
@@ -44,7 +40,6 @@ body {
 }
 
 .option {
-    background-color: #007BFF;
     color: white;
     border: none;
     padding: 10px;
@@ -55,8 +50,24 @@ body {
     transition: background-color 0.3s;
 }
 
+.option-1 {
+    background-color: #007BFF;
+}
+
+.option-2 {
+    background-color: #28A745; 
+}
+
+.option-3 {
+    background-color: #FFC107; 
+}
+
+.option-4 {
+    background-color: #DC3545; 
+}
+
 .option:hover {
-    background-color: #0056b3;
+    opacity: 0.8;
 }
 
 #retry-btn {
@@ -69,8 +80,56 @@ body {
     border-color: #bd2130;
 }
 
-/* Clase para el efecto de ocultamiento con animación */
 .hidden-with-animation {
     opacity: 0;
     transition: opacity 0.5s ease-out;
+}
+
+
+/* Fuente estilo Goku */
+.goku-font {
+    font-family: 'Bangers', cursive;
+    font-size: 4rem;
+    color: #f39c12;
+    text-shadow: 2px 2px 4px #000;
+    margin-bottom: 20px;
+}
+
+/* Imagen logo de Goku */
+.logo-goku {
+    width: 250px;
+    height: auto;
+    margin-bottom: 20px;
+}
+
+/* Estilos adicionales del cuestionario */
+.hidden {
+    display: none;
+}
+
+.quiz-container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 2px solid #ddd;
+    border-radius: 10px;
+    background-color: #fff;
+}
+
+button {
+    font-size: 1.2rem;
+}
+
+h2 {
+    font-size: 1.5rem;
+}
+
+.hidden-offscreen {
+    transform: translateX(-150%);
+    transition: transform 0.5s ease-out;
+}
+
+.visible-onscreen {
+    transform: translateX(0);
+    transition: transform 0.5s ease-out;
 }
