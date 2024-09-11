@@ -35,15 +35,6 @@ function startQuiz() {
     selectedQuestions = shuffle(selectedQuestions); // Mezclar preguntas
     
     loadQuestion();
-    
-    // Mover el botón de regresar fuera de la pantalla
-    const goBackBtn = document.getElementById('go-back-btn');
-    goBackBtn.classList.add('hidden-offscreen');
-    
-    // Una vez que termine la animación, podemos ocultarlo completamente
-    goBackBtn.addEventListener('transitionend', () => {
-        goBackBtn.style.display = 'none'; // Ocultar completamente el botón
-    }, { once: true });
 }
 
 // Función para volver a la selección de tema
@@ -101,6 +92,9 @@ function checkAnswer(selectedIndex) {
     const questionData = selectedQuestions[currentQuestionIndex];
     const correctOptionIndex = questionData.options.indexOf(questionData.options[questionData.correct]);
 
+    // Obtener todos los botones de opción
+    const optionButtons = document.querySelectorAll('#options-container button');
+
     // Si la respuesta es correcta
     if (selectedIndex === correctOptionIndex) {
         score++; // Incrementa el puntaje
@@ -116,13 +110,31 @@ function checkAnswer(selectedIndex) {
         imageIndex = images.length - 1; // No permitir que sobrepase el límite superior
     }
 
-    // Actualizar la imagen mostrada
-    displayedImages.push(images[imageIndex]);
+    // Actualizar la imagen mostrada inmediatamente
+    const imageElement = document.getElementById('question-image');
+    imageElement.src = images[imageIndex] || previousImage; // Actualiza la imagen
+    imageElement.style.opacity = 1; // Asegura que la imagen se muestre
 
-    // Cargar la siguiente pregunta
-    currentQuestionIndex++;
-    loadQuestion();
+    // Cambiar los colores de fondo de las opciones
+    optionButtons.forEach((button, index) => {
+        if (index === correctOptionIndex) {
+            button.style.backgroundColor = 'green'; // Respuesta correcta en verde
+        } else {
+            button.style.backgroundColor = 'red'; // Respuesta incorrecta en rojo
+        }
+        // Deshabilitar los botones después de seleccionar una opción
+        button.disabled = true;
+    });
+
+    // Esperar unos segundos antes de cargar la siguiente pregunta
+    setTimeout(() => {
+        // Cargar la siguiente pregunta
+        currentQuestionIndex++;
+        loadQuestion();
+    }, 1000); // Espera 2 segundos antes de cargar la siguiente pregunta
 }
+
+
 
 // Función para mostrar el resultado final
 function showResult() {
@@ -131,7 +143,7 @@ function showResult() {
     document.getElementById('options-container').innerHTML = '';
     document.getElementById('result').classList.remove('hidden');
     document.getElementById('final-score').innerText = `Tu puntuación: ${score} de ${selectedQuestions.length}`;
-    document.getElementById('final-image').innerText = `Última imagen mostrada: ${displayedImages[displayedImages.length - 1] || previousImage}`;
+    //document.getElementById('final-image').innerText = `Última imagen mostrada: ${displayedImages[displayedImages.length - 1] || previousImage}`;
     document.getElementById('retry-btn').classList.remove('hidden');
 }
 

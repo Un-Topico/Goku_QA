@@ -48,6 +48,7 @@ body {
     cursor: pointer;
     font-size: 16px;
     transition: background-color 0.3s;
+    height: 120px;
 }
 
 .option-1 {
