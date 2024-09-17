@@ -20,8 +20,12 @@
                 <h1 class="goku-font">GokuQA</h1>
                 
                 <h2>Selecciona el tema del cuestionario</h2>
-                <button class="btn btn-primary mt-3" onclick="selectTopic('preguntas1')">Tema 1</button>
-                <button class="btn btn-primary mt-3" onclick="selectTopic('preguntas2')">Tema 2</button>
+                <button class="btn btn-primary mt-3" onclick="selectTopic('preguntas1')">Modelos de pruebas de software</button>
+                <button class="btn btn-primary mt-3" onclick="selectTopic('preguntas2')">Pruebas dinámicas</button>
+                <button class="btn btn-primary mt-3" onclick="selectTopic('preguntas3')">Pruebas estáticas</button>
+                <button class="btn btn-primary mt-3" onclick="selectTopic('preguntas4')">Caja negra</button>
+                <button class="btn btn-primary mt-3" onclick="selectTopic('preguntas5')">Caja blanca</button>
+                <button class="btn btn-primary mt-3" onclick="selectTopic('preguntas6')">Caja gris</button>
             </div>
 
             <div id="quiz-container" class="hidden">
@@ -33,7 +37,7 @@
                     <!-- Opciones aparecerán aquí -->
                 </div>
                 <button id="start-btn" class="btn btn-primary mt-3" onclick="startQuiz()">Comenzar</button>
-                <button id="go-back-btn" class="btn btn-secondary mt-3 hidden" onclick="goBack()">Salir</button>
+                <button id="go-back-btn" class="btn btn-secondary mt-3 hidden" onclick="goBack()">Regresar</button>
                 <div id="result" class="hidden mt-3">
                     <h3>¡Has completado el cuestionario!</h3>
                     <p id="final-score"></p>
