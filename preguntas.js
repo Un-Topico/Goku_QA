@@ -1,47 +1,103 @@
 const preguntas1 = [
     {
-        question: "¿Qué son las pruebas de caja negra?",
+        question: "¿Cuál de los siguientes es un modelo de prueba basado en el comportamiento del sistema?",
         options: [
-            "Pruebas que examinan las funcionalidades del software sin conocer su diseño interno, enfocándose en entradas y salidas.",
-            "Pruebas que examinan el código fuente línea por línea.",
-            "Pruebas que solo se realizan después de la implementación.",
-            "Pruebas que solo verifican la interfaz gráfica del usuario."
+            "Prueba de integración",
+            "Prueba de regresión",
+            "Prueba funcional",
+            "Prueba de estrés"
+        ],
+        correct: 2, // Índice de la respuesta correcta
+    },
+    {
+        question: "¿Cuál es el principal propósito de la prueba de regresión?",
+        options: [
+            "Verificar la seguridad del software",
+            "Asegurar que los cambios no afecten las funcionalidades existentes",
+            "Evaluar el rendimiento bajo carga",
+            "Verificar la compatibilidad con dispositivos móviles"
+        ],
+        correct: 1, // Índice de la respuesta correcta
+    },
+    {
+        question: "¿Qué tipo de prueba se enfoca en evaluar cómo el software funciona con otros sistemas o componentes?",
+        options: [
+            "Prueba de unidad",
+            "Prueba de integración",
+            "Prueba de aceptación",
+            "Prueba de humo"
+        ],
+        correct: 1, // Índice de la respuesta correcta
+    },
+    {
+        question: "¿Cuál de los siguientes modelos de prueba es utilizado para probar el software en etapas tempranas?",
+        options: [
+            "Prueba de aceptación",
+            "Prueba de humo",
+            "Prueba de regresión",
+            "Prueba de integración continua"
+        ],
+        correct: 1, // Índice de la respuesta correcta
+    },
+    {
+        question: "¿Qué modelo de prueba asegura que el sistema cumpla con los requisitos del usuario final?",
+        options: [
+            "Prueba de estrés",
+            "Prueba de aceptación",
+            "Prueba de rendimiento",
+            "Prueba de regresión"
+        ],
+        correct: 1, // Índice de la respuesta correcta
+    },
+    {
+        question: "¿En qué modelo de prueba se utilizan casos de prueba diseñados sin conocer el código fuente?",
+        options: [
+            "Prueba de caja blanca",
+            "Prueba de unidad",
+            "Prueba de caja negra",
+            "Prueba de integración"
+        ],
+        correct: 2, // Índice de la respuesta correcta
+    },
+    {
+        question: "¿Cuál de las siguientes pruebas verifica el comportamiento del sistema bajo condiciones extremas?",
+        options: [
+            "Prueba de carga",
+            "Prueba de estrés",
+            "Prueba de humo",
+            "Prueba de regresión"
+        ],
+        correct: 1, // Índice de la respuesta correcta
+    },
+    {
+        question: "¿Cuál es el principal objetivo de la prueba de unidad?",
+        options: [
+            "Verificar la integración entre componentes",
+            "Validar la funcionalidad completa del sistema",
+            "Probar el rendimiento del software",
+            "Verificar el funcionamiento correcto de pequeñas partes del código individualmente"
+        ],
+        correct: 3, // Índice de la respuesta correcta
+    },
+    {
+        question: "¿Qué modelo de prueba se enfoca en verificar la estabilidad y fiabilidad del sistema después de pequeños cambios?",
+        options: [
+            "Prueba de integración",
+            "Prueba de aceptación",
+            "Prueba de regresión",
+            "Prueba de carga"
+        ],
+        correct: 2, // Índice de la respuesta correcta
+    },
+    {
+        question: "¿Qué tipo de prueba se realiza para determinar si el sistema puede manejar una gran cantidad de usuarios simultáneos?",
+        options: [
+            "Prueba de carga",
+            "Prueba de unidad",
+            "Prueba de humo",
+            "Prueba funcional"
         ],
         correct: 0, // Índice de la respuesta correcta
-        image: "./img/imagenes/bien 1.jpg"
-    },
-    {
-        question: "¿Qué ventajas ofrecen las pruebas de caja negra?",
-        options: [
-            "No requieren conocer el código fuente, permitiendo enfocarse en requisitos y comportamiento del software.",
-            "Permiten evaluar la eficiencia del código fuente.",
-            "Requieren menos tiempo y recursos que otros tipos de pruebas.",
-            "Son las más adecuadas para probar la seguridad del software."
-        ],
-        correct: 1,
-        image: "./img/imagenes/bien 1-1.jpg"
-    },
-    {
-        question: "¿Qué son las pruebas de caja blanca?",
-        options: [
-            "Pruebas que evalúan el software con conocimiento detallado del código y su estructura interna.",
-            "Pruebas que solo se centran en la interfaz del usuario.",
-            "Pruebas que no requieren conocimiento técnico avanzado.",
-            "Pruebas que se llevan a cabo sin acceso al código fuente."
-        ],
-        correct: 2,
-        image: "./img/imagenes/bien 2.jpg"
-    },
-    {
-        question: "¿Cómo se llevan a cabo las pruebas de caja blanca?",
-        options: [
-            "Mediante la creación de casos de prueba basados en el análisis del código y la estructura interna.",
-            "Con pruebas aleatorias de la funcionalidad del software.",
-            "Verificando únicamente las salidas del sistema.",
-            "Usando solo herramientas automatizadas sin intervención manual."
-        ],
-        correct: 3,
-        image: "./img/imagenes/bien 2-1.jpg"
     }
 ];
 
@@ -55,7 +111,6 @@ const preguntas2 = [
             "Prueba que revisa el código fuente línea por línea."
         ],
         correct: 0,
-        image: "./img/imagenes/bien 2.jpg"
     },
     {
         question: "¿Cuál es el objetivo principal de las pruebas de regresión?",
@@ -66,7 +121,6 @@ const preguntas2 = [
             "Asegurar que el software cumpla con los requisitos del cliente."
         ],
         correct: 0,
-        image: "./img/imagenes/bien 2-1.jpg"
     },
     {
         question: "¿Qué son las pruebas de sistema?",
@@ -77,7 +131,6 @@ const preguntas2 = [
             "Pruebas que se realizan sin acceso al sistema completo."
         ],
         correct: 0,
-        image: "./img/imagenes/bien 3.jpg"
     },
     {
         question: "¿Qué es una prueba de aceptación?",
@@ -88,6 +141,5 @@ const preguntas2 = [
             "Prueba realizada sin involucrar al cliente."
         ],
         correct: 0,
-        image: "./img/imagenes/bien 3-1.jpg"
     }
 ];
