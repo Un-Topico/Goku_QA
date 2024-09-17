@@ -8,16 +8,21 @@ let selectedQuestions = [];
 
 // Función para seleccionar el tema del cuestionario
 function selectTopic(topic) {
-    if (topic === 'preguntas1') {
-        selectedQuestions = preguntas1;
-    } else if (topic === 'preguntas2') {
-        selectedQuestions = preguntas2;
-    }
+    const preguntas = {
+        preguntas1,
+        preguntas2,
+        preguntas3,
+        preguntas4,
+        preguntas5,
+        preguntas6
+    };
+
+    selectedQuestions = preguntas[topic] || [];
+
     document.getElementById('selection-container').classList.add('hidden');
     document.getElementById('quiz-container').classList.remove('hidden');
     document.getElementById('go-back-btn').classList.remove('hidden'); // Mostrar el botón de regresar
 }
-
 
 // Función para iniciar el cuestionario
 function startQuiz() {
