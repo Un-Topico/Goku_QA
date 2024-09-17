@@ -21,13 +21,20 @@ function selectTopic(topic) {
 
 // Función para iniciar el cuestionario
 function startQuiz() {
+    // Ocultar el botón "Comenzar" y el botón "Regresar"
     document.getElementById('start-btn').style.display = 'none';
+    document.getElementById('go-back-btn').style.display = 'none';
+
+    // Ocultar cualquier resultado anterior
     document.getElementById('result').classList.add('hidden');
     document.getElementById('options-container').innerHTML = '';
     score = 0;
     currentQuestionIndex = 0;
     displayedImages = [previousImage];
-    
+
+    // Iniciar la barra de progreso en 0
+    updateProgressBar();
+
     // Mezclar preguntas y opciones
     selectedQuestions.forEach(q => {
         q.options = shuffle(q.options); // Mezclar opciones
@@ -37,14 +44,28 @@ function startQuiz() {
     loadQuestion();
 }
 
+
 // Función para volver a la selección de tema
 function goBack() {
     document.getElementById('selection-container').classList.remove('hidden');
     document.getElementById('quiz-container').classList.add('hidden');
     
+    // Reiniciar variables clave
+    currentQuestionIndex = 0;
+    score = 0;
+    displayedImages = [previousImage];
+    
+    // Restaurar el estado inicial de los botones
     const goBackBtn = document.getElementById('go-back-btn');
     goBackBtn.classList.remove('hidden-offscreen');
     goBackBtn.classList.add('visible-onscreen');
+}
+
+function updateProgressBar() {
+    const progressBar = document.getElementById('progress-bar');
+    const progressPercentage = ((currentQuestionIndex + 1) / selectedQuestions.length) * 100;
+    progressBar.style.width = `${progressPercentage}%`;
+    progressBar.setAttribute('aria-valuenow', progressPercentage);
 }
 
 // Función para cargar la siguiente pregunta
@@ -61,6 +82,10 @@ function loadQuestion() {
         imageElement.onload = () => {
             imageElement.style.opacity = 1; // Muestra la imagen cuando haya terminado de cargar
         };
+
+        // Actualizar la barra de progreso
+        updateProgressBar();
+
         document.getElementById('options-container').innerHTML = '';
 
         // Crear un contenedor de Bootstrap con dos columnas
@@ -86,6 +111,7 @@ function loadQuestion() {
         showResult();
     }
 }
+
 
 // Función para verificar la respuesta seleccionada
 function checkAnswer(selectedIndex) {

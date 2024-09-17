@@ -29,6 +29,11 @@
             </div>
 
             <div id="quiz-container" class="hidden">
+                <!-- Barra de progreso -->
+                <div class="progress mb-4">
+                    <div id="progress-bar" class="progress-bar" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+            
                 <div class="quiz-header text-center">
                     <img id="question-image" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTI_XsT6_7gyTqVxNDtl_G5jaKnaWdK1z0O1w&s" alt="Imagen relacionada" class="img-fluid">
                     <h2 id="question">Haz clic en "Comenzar" para empezar el cuestionario</h2>
@@ -44,7 +49,7 @@
                     <p id="final-image"></p>
                     <button id="retry-btn" class="btn btn-danger mt-3 hidden" onclick="retryQuiz()">Reintentar</button>
                 </div>
-            </div>
+            </div>            
         </div>
     </div>
     <script src="imagenes.js"></script>

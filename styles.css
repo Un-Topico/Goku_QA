@@ -134,3 +134,16 @@ h2 {
     transform: translateX(0);
     transition: transform 0.5s ease-out;
 }
+
+/* Estilos de la barra de progreso */
+.progress {
+    height: 20px;
+    border-radius: 10px;
+    overflow: hidden;
+    background-color: #f4f4f4;
+}
+
+.progress-bar {
+    background-color: #28a745; /* Color verde */
+    transition: width 0.5s ease;
+}
