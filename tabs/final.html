@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resultado Final</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        #final-container {
+            text-align: center;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 400px;
+        }
+
+        #final-score {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+        }
+
+        button {
+            font-size: 1.2rem;
+            padding: 10px 20px;
+            background-color: #dc3545;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #c82333;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="final-container">
+        <img id="final-image" src="../img/normal.jpg" alt="Imagen final">
+        <h1>Resultado Final</h1>
+        <p id="final-score"></p>
+        <button onclick="retryQuiz()">Reintentar</button>
+    </div>
+
+    <script>
+        // Obtener el puntaje final desde localStorage
+        const finalScore = localStorage.getItem('finalScore');
+        const finalImage = localStorage.getItem('finalImage');
+        const numPreguntas = localStorage.getItem('numPreguntas');
+        document.getElementById('final-score').innerText = `Puntuación:  ${finalScore} / ${numPreguntas}`;
+        document.getElementById('final-image').src = finalImage;
+
+        function retryQuiz() {
+            window.location.href = '../index.html';  // Volver a la selección de tema
+        }
+    </script>
+</body>
+
+</html>

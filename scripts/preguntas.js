@@ -1,4 +1,4 @@
-const preguntas1 = [
+const Modelos_de_pruebas_de_software = [
     {
         question: "¿Cuál de los siguientes es un modelo de prueba basado en el comportamiento del sistema?",
         options: [
@@ -101,7 +101,7 @@ const preguntas1 = [
     }
 ];
 
-const preguntas2 = [
+const Pruebas_dinamicas = [
     {
         question: "¿Qué son las pruebas dinámicas de software?",
         options: [
@@ -204,7 +204,7 @@ const preguntas2 = [
     }
 ];
 
-const preguntas3 = [
+const Pruebas_estaticas = [
     {
         question: "¿Qué son las pruebas estáticas de software?",
         options: [
@@ -307,7 +307,7 @@ const preguntas3 = [
     }
 ];
 
-const preguntas4 = [
+const Caja_negra = [
     {
         question: "¿Qué son las pruebas de Caja Negra en software?",
         options: [
@@ -410,7 +410,7 @@ const preguntas4 = [
     }
 ];
 
-const preguntas5 = [
+const Caja_blanca = [
     {
         question: "¿Qué son las pruebas de Caja Blanca en software?",
         options: [
@@ -513,7 +513,7 @@ const preguntas5 = [
     }
 ];
 
-const preguntas6 = [
+const Caja_gris = [
     {
         question: "¿Qué son las pruebas de Caja Gris en software?",
         options: [

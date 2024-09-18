@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comenzar el Quiz</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        #comenzar-container {
+            text-align: center;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 400px;
+        }
+
+        #quiz-name {
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+
+        #question-image {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        button {
+            font-size: 1.2rem;
+            padding: 10px 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="comenzar-container">
+        <h1 id="quiz-name">Cuestionario</h1>
+        <img id="question-image"
+            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTI_XsT6_7gyTqVxNDtl_G5jaKnaWdK1z0O1w&s"
+            alt="Imagen relacionada" class="img-fluid">
+        <p>¿Quieres comenzar el cuestionario?</p>
+        <button onclick="startQuiz()">Comenzar</button>
+    </div>
+
+    <script>
+        // Cargar el tema seleccionado desde localStorage
+        const selectedTopic = localStorage.getItem('selectedTopic');
+        document.getElementById('quiz-name').innerText = `Cuestionario sobre ${selectedTopic}`;
+
+        function startQuiz() {
+            window.location.href = './quizz.html';  // Redirigir a la página del quiz
+        }
+    </script>
+</body>
+
+</html>

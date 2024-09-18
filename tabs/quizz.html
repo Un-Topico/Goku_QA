@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        #quiz-container {
+            text-align: center;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 600px;
+        }
+
+        #question {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+        }
+
+        #options-container {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .option {
+            border: none;
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            color: white;
+            transition: background-color 0.3s;
+        }
+
+        .option-1 {
+            background-color: #007BFF;
+        }
+
+        .option-2 {
+            background-color: #28A745;
+        }
+
+        .option-3 {
+            background-color: #FFC107;
+        }
+
+        .option-4 {
+            background-color: #DC3545;
+        }
+
+        .option:hover {
+            opacity: 0.8;
+        }
+
+        #next-btn {
+            font-size: 1.2rem;
+            margin-top: 20px;
+            padding: 10px 20px;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        #question-image {
+            width: 100%;
+            height: auto;
+            max-height: 300px;
+            object-fit: cover;
+            margin-bottom: 20px;
+            transition: opacity 0.5s ease-in-out;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="quiz-container">
+        <img id="question-image" src="../img/normal.jpg" alt="Imagen de la pregunta">
+        <h1 id="question">Pregunta</h1>
+        <div id="options-container"></div>
+        <button id="next-btn" onclick="nextQuestion()">Siguiente</button>
+    </div>
+
+    <script src="../scripts/preguntas.js"></script>
+    <script src="../scripts/imagenes.js"></script>
+
+    <script>
+        let currentQuestionIndex = 0;
+        let score = 0;
+        let lastImageSrc = '../img/normal.jpg';  // Variable global para almacenar la ruta de la última imagen
+        let numPreguntas = 0;
+        const questionTopic = localStorage.getItem('questionTopic');
+
+        const preguntas = {
+            Modelos_de_pruebas_de_software,
+            Pruebas_dinamicas,
+            Pruebas_estaticas,
+            Caja_negra,
+            Caja_blanca,
+            Caja_gris,
+        };
+
+        // Cargar preguntas basadas en el tema seleccionado
+        const selectedQuestions = preguntas[questionTopic] || [];
+        numPreguntas = selectedQuestions.length;
+
+        function loadQuestion() {
+            if (currentQuestionIndex < selectedQuestions.length) {
+                const questionData = selectedQuestions[currentQuestionIndex];
+                document.getElementById('question').innerText = questionData.question;
+                document.getElementById('options-container').innerHTML = '';
+
+                // Cambiar la imagen para la nueva pregunta
+                const imageElement = document.getElementById('question-image');
+                lastImageSrc = images[imageIndex] || '../img/normal.jpg';
+                imageElement.src = lastImageSrc;
+
+                questionData.options.forEach((option, index) => {
+                    const button = document.createElement('button');
+                    button.innerText = option;
+                    button.classList.add('option'); // Añade la clase base 'option'
+
+                    // Asigna una clase diferente a cada botón
+                    button.classList.add(`option-${index + 1}`); // Añade la clase específica ('option-1', 'option-2', etc.)
+
+                    button.onclick = () => checkAnswer(index, questionData.correct);
+                    document.getElementById('options-container').appendChild(button);
+                });
+            } else {
+                showFinal();
+            }
+        }
+
+        function checkAnswer(selectedIndex, correctIndex) {
+            if (selectedIndex === correctIndex) {
+                score++;
+                imageIndex = (imageIndex + 1) % images.length; // Avanza en el array de imágenes
+            } else {
+                imageIndex = (imageIndex - 1 + images.length) % images.length; // Retrocede en el array de imágenes
+            }
+
+            // Actualizar la imagen después de responder
+            const imageElement = document.getElementById('question-image');
+            lastImageSrc = images[imageIndex] || '../img/normal.jpg';
+            imageElement.src = lastImageSrc;
+
+            // Esperar un momento antes de cargar la siguiente pregunta
+            currentQuestionIndex++;
+            loadQuestion();
+        }
+
+        function showFinal() {
+            localStorage.setItem('finalScore', score);
+            localStorage.setItem('finalImage', lastImageSrc); // Pasar la ruta de la última imagen
+            localStorage.setItem('numPreguntas', numPreguntas); // Número de Preguntas
+            window.location.href = 'final.html';  // Redirigir a la página de resultados
+        }
+
+        loadQuestion();  // Cargar la primera pregunta
+    </script>
+</body>
+
+</html>
+
