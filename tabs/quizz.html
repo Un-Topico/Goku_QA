@@ -35,11 +35,29 @@
             justify-content: center;
             align-items: center;
             width: 40vw;
-            /* Tamaño fijo */
             height: 90vh;
-            /* Tamaño fijo */
             overflow: hidden;
-            /* Controla si el contenido excede el contenedor */
+        }
+
+        #progress-container {
+            width: 100%;
+            background-color: #ddd;
+            height: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        #progress-bar {
+            width: 0;
+            height: 100%;
+            background-color: #28a745;
+            border-radius: 10px;
+            transition: width 0.3s ease;
+        }
+
+        #progress-text {
+            font-size: 1rem;
+            margin-bottom: 20px;
         }
 
         #question {
@@ -64,9 +82,7 @@
             color: white;
             transition: background-color 0.3s;
             width: 100%;
-            /* Ocupa todo el ancho del contenedor */
             box-sizing: border-box;
-            /* Asegura que el padding y border no desborden el botón */
         }
 
         .option-1 {
@@ -91,12 +107,10 @@
 
         .correct {
             background-color: #28A746 !important;
-            /* Verde para las opciones correctas */
         }
 
         .incorrect {
             background-color: #DC3546 !important;
-            /* Rojo para las opciones incorrectas */
         }
 
         #next-btn {
@@ -114,19 +128,14 @@
             justify-content: center;
             align-items: center;
             width: 500px;
-            /* Tamaño fijo */
             height: 90vh;
-            /* Tamaño fijo */
-            background-color: red;
             overflow: hidden;
-            /* Esconde cualquier contenido que se salga del contenedor */
         }
 
         #question-image {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            /* Ajusta la imagen sin distorsionar, recortando si es necesario */
         }
 
         button:disabled {
@@ -139,19 +148,18 @@
     <div id="quiz-container">
         <div id="image-container">
             <img id="question-image" src="../img/normal.jpg" alt="Imagen de la pregunta">
-
         </div>
 
         <div id="question-container">
-            <h1 id="question">Pregunta</h1>
-            <div id="options-container">
-
+            <div id="progress-container">
+                <div id="progress-bar"></div>
             </div>
+            <p id="progress-text">Pregunta 1 de <span id="total-questions"></span></p>
+            <h1 id="question">Pregunta</h1>
+            <div id="options-container"></div>
             <button id="next-btn" class="hidden" onclick="nextQuestion()">Siguiente</button>
         </div>
-
     </div>
-
 
     <script src="../scripts/preguntas.js"></script>
     <script src="../scripts/imagenes.js"></script>
@@ -175,6 +183,8 @@
         const selectedQuestions = preguntas[questionTopic] || [];
         numPreguntas = selectedQuestions.length;
 
+        document.getElementById('total-questions').innerText = numPreguntas;
+
         function loadQuestion() {
             if (currentQuestionIndex < selectedQuestions.length) {
                 const questionData = selectedQuestions[currentQuestionIndex];
@@ -195,8 +205,14 @@
                     document.getElementById('options-container').appendChild(button);
                 });
 
-                // Ocultar el botón "Siguiente" al cargar una nueva pregunta
                 document.getElementById('next-btn').classList.add('hidden');
+
+                // Actualizar la barra de progreso
+                const progress = ((currentQuestionIndex + 1) / selectedQuestions.length) * 100;
+                document.getElementById('progress-bar').style.width = progress + '%';
+
+                // Actualizar el texto de la pregunta actual
+                document.getElementById('progress-text').innerText = `Pregunta ${currentQuestionIndex + 1} de ${selectedQuestions.length}`;
             } else {
                 showFinal();
             }
@@ -207,20 +223,15 @@
         function selectOption(selectedIndex, correctIndex) {
             selectedAnswer = selectedIndex;
 
-            // Obtener todos los botones de opción
             const options = document.querySelectorAll('.option');
 
-            // Resaltar las respuestas correctas y equivocadas
-            console.log(correctIndex);
             options.forEach((button, index) => {
-                button.disabled = true; // Deshabilitar los botones después de seleccionar una opción
+                button.disabled = true;
 
-                console.log(index);
                 if (index === correctIndex) {
-                    button.classList.add('correct'); // Resaltar en verde la respuesta correcta
-                    console.log('correcto');
+                    button.classList.add('correct');
                 } else {
-                    button.classList.add('incorrect'); // Resaltar en rojo la respuesta seleccionada incorrecta
+                    button.classList.add('incorrect');
                 }
             });
 
@@ -232,18 +243,14 @@
                 imageIndex = (imageIndex - 1 + images.length) % images.length;
             }
 
-            // Actualizar la imagen después de responder
             const imageElement = document.getElementById('question-image');
             lastImageSrc = images[imageIndex] || '../img/normal.jpg';
             imageElement.src = lastImageSrc;
 
-            // Mostrar el botón "Siguiente" cuando se seleccione una opción
             document.getElementById('next-btn').classList.remove('hidden');
         }
 
         function nextQuestion() {
-
-
             currentQuestionIndex++;
             loadQuestion();
         }
@@ -255,7 +262,7 @@
             window.location.href = 'final.html';
         }
 
-        loadQuestion(); // Cargar la primera pregunta
+        loadQuestion();
     </script>
 </body>
 
