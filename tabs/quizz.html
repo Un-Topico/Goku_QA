@@ -18,12 +18,28 @@
         }
 
         #quiz-container {
+            display: flex;
             text-align: center;
             background-color: #fff;
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            width: 600px;
+            width: 1000px;
+            height: 90%;
+        }
+
+        #question-container {
+            margin-left: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 40vw;
+            /* Tamaño fijo */
+            height: 90vh;
+            /* Tamaño fijo */
+            overflow: hidden;
+            /* Controla si el contenido excede el contenedor */
         }
 
         #question {
@@ -32,8 +48,10 @@
         }
 
         #options-container {
+            width: 100%;
             display: flex;
             flex-direction: column;
+            gap: 10px;
         }
 
         .option {
@@ -45,6 +63,10 @@
             font-size: 16px;
             color: white;
             transition: background-color 0.3s;
+            width: 100%;
+            /* Ocupa todo el ancho del contenedor */
+            box-sizing: border-box;
+            /* Asegura que el padding y border no desborden el botón */
         }
 
         .option-1 {
@@ -68,11 +90,13 @@
         }
 
         .correct {
-            background-color: #28A746 !important; /* Verde para las opciones correctas */
+            background-color: #28A746 !important;
+            /* Verde para las opciones correctas */
         }
 
         .incorrect {
-            background-color: #DC3546 !important; /* Rojo para las opciones incorrectas */
+            background-color: #DC3546 !important;
+            /* Rojo para las opciones incorrectas */
         }
 
         #next-btn {
@@ -85,13 +109,24 @@
             display: none;
         }
 
+        #image-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 500px;
+            /* Tamaño fijo */
+            height: 90vh;
+            /* Tamaño fijo */
+            background-color: red;
+            overflow: hidden;
+            /* Esconde cualquier contenido que se salga del contenedor */
+        }
+
         #question-image {
-            width: auto;
-            height: 400px;
-            max-height: 300px;
+            width: 100%;
+            height: 100%;
             object-fit: cover;
-            margin-bottom: 20px;
-            transition: opacity 0.5s ease-in-out;
+            /* Ajusta la imagen sin distorsionar, recortando si es necesario */
         }
 
         button:disabled {
@@ -102,11 +137,21 @@
 
 <body>
     <div id="quiz-container">
-        <img id="question-image" src="../img/normal.jpg" alt="Imagen de la pregunta">
-        <h1 id="question">Pregunta</h1>
-        <div id="options-container"></div>
+        <div id="image-container">
+            <img id="question-image" src="../img/normal.jpg" alt="Imagen de la pregunta">
+
+        </div>
+
+        <div id="question-container">
+            <h1 id="question">Pregunta</h1>
+            <div id="options-container">
+
+            </div>
+            <button id="next-btn" class="hidden" onclick="nextQuestion()">Siguiente</button>
+        </div>
+
     </div>
-    <button id="next-btn" class="hidden" onclick="nextQuestion()">Siguiente</button>
+
 
     <script src="../scripts/preguntas.js"></script>
     <script src="../scripts/imagenes.js"></script>
@@ -169,7 +214,7 @@
             console.log(correctIndex);
             options.forEach((button, index) => {
                 button.disabled = true; // Deshabilitar los botones después de seleccionar una opción
-                
+
                 console.log(index);
                 if (index === correctIndex) {
                     button.classList.add('correct'); // Resaltar en verde la respuesta correcta
@@ -197,7 +242,7 @@
         }
 
         function nextQuestion() {
-            
+
 
             currentQuestionIndex++;
             loadQuestion();
@@ -215,6 +260,3 @@
 </body>
 
 </html>
-
-
-

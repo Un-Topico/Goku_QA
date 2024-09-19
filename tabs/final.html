@@ -47,15 +47,38 @@
         }
 
         #final-image {
-            height: 400px;
+            height: 100%;
             width: auto;
+        }
+
+        #image-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 90%;
+            height: 60vh;
+            background-color: red;
+            overflow: hidden;
+            /* Esconde cualquier contenido que se salga del contenedor */
+            margin: 0 auto;
+        }
+
+        #question-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            /* Ajusta la imagen sin distorsionar, recortando si es necesario */
         }
     </style>
 </head>
 
 <body>
     <div id="final-container">
-        <img id="final-image" src="../img/normal.jpg" alt="Imagen final">
+        
+        <div id="image-container">
+            <img id="final-image" src="../img/normal.jpg" alt="Imagen final">
+        </div>
+
         <h1>Resultado Final</h1>
         <p id="final-score"></p>
         <button onclick="retryQuiz()">Reintentar</button>
