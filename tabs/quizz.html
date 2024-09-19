@@ -67,6 +67,14 @@
             opacity: 0.8;
         }
 
+        .correct {
+            background-color: #28A746 !important; /* Verde para las opciones correctas */
+        }
+
+        .incorrect {
+            background-color: #DC3546 !important; /* Rojo para las opciones incorrectas */
+        }
+
         #next-btn {
             font-size: 1.2rem;
             margin-top: 20px;
@@ -78,12 +86,16 @@
         }
 
         #question-image {
-            width: 100%;
-            height: auto;
+            width: auto;
+            height: 400px;
             max-height: 300px;
             object-fit: cover;
             margin-bottom: 20px;
             transition: opacity 0.5s ease-in-out;
+        }
+
+        button:disabled {
+            cursor: not-allowed;
         }
     </style>
 </head>
@@ -93,8 +105,8 @@
         <img id="question-image" src="../img/normal.jpg" alt="Imagen de la pregunta">
         <h1 id="question">Pregunta</h1>
         <div id="options-container"></div>
-        <button id="next-btn" onclick="nextQuestion()">Siguiente</button>
     </div>
+    <button id="next-btn" class="hidden" onclick="nextQuestion()">Siguiente</button>
 
     <script src="../scripts/preguntas.js"></script>
     <script src="../scripts/imagenes.js"></script>
@@ -102,7 +114,7 @@
     <script>
         let currentQuestionIndex = 0;
         let score = 0;
-        let lastImageSrc = '../img/normal.jpg';  // Variable global para almacenar la ruta de la última imagen
+        let lastImageSrc = '../img/normal.jpg'; // Variable global para almacenar la ruta de la última imagen
         let numPreguntas = 0;
         const questionTopic = localStorage.getItem('questionTopic');
 
@@ -115,7 +127,6 @@
             Caja_gris,
         };
 
-        // Cargar preguntas basadas en el tema seleccionado
         const selectedQuestions = preguntas[questionTopic] || [];
         numPreguntas = selectedQuestions.length;
 
@@ -133,25 +144,47 @@
                 questionData.options.forEach((option, index) => {
                     const button = document.createElement('button');
                     button.innerText = option;
-                    button.classList.add('option'); // Añade la clase base 'option'
-
-                    // Asigna una clase diferente a cada botón
-                    button.classList.add(`option-${index + 1}`); // Añade la clase específica ('option-1', 'option-2', etc.)
-
-                    button.onclick = () => checkAnswer(index, questionData.correct);
+                    button.classList.add('option');
+                    button.classList.add(`option-${index + 1}`);
+                    button.onclick = () => selectOption(index, questionData.correct);
                     document.getElementById('options-container').appendChild(button);
                 });
+
+                // Ocultar el botón "Siguiente" al cargar una nueva pregunta
+                document.getElementById('next-btn').classList.add('hidden');
             } else {
                 showFinal();
             }
         }
 
-        function checkAnswer(selectedIndex, correctIndex) {
-            if (selectedIndex === correctIndex) {
+        let selectedAnswer = null;
+
+        function selectOption(selectedIndex, correctIndex) {
+            selectedAnswer = selectedIndex;
+
+            // Obtener todos los botones de opción
+            const options = document.querySelectorAll('.option');
+
+            // Resaltar las respuestas correctas y equivocadas
+            console.log(correctIndex);
+            options.forEach((button, index) => {
+                button.disabled = true; // Deshabilitar los botones después de seleccionar una opción
+                
+                console.log(index);
+                if (index === correctIndex) {
+                    button.classList.add('correct'); // Resaltar en verde la respuesta correcta
+                    console.log('correcto');
+                } else {
+                    button.classList.add('incorrect'); // Resaltar en rojo la respuesta seleccionada incorrecta
+                }
+            });
+
+            const questionData = selectedQuestions[currentQuestionIndex];
+            if (selectedAnswer === questionData.correct) {
                 score++;
-                imageIndex = (imageIndex + 1) % images.length; // Avanza en el array de imágenes
+                imageIndex = (imageIndex + 1) % images.length;
             } else {
-                imageIndex = (imageIndex - 1 + images.length) % images.length; // Retrocede en el array de imágenes
+                imageIndex = (imageIndex - 1 + images.length) % images.length;
             }
 
             // Actualizar la imagen después de responder
@@ -159,21 +192,29 @@
             lastImageSrc = images[imageIndex] || '../img/normal.jpg';
             imageElement.src = lastImageSrc;
 
-            // Esperar un momento antes de cargar la siguiente pregunta
+            // Mostrar el botón "Siguiente" cuando se seleccione una opción
+            document.getElementById('next-btn').classList.remove('hidden');
+        }
+
+        function nextQuestion() {
+            
+
             currentQuestionIndex++;
             loadQuestion();
         }
 
         function showFinal() {
             localStorage.setItem('finalScore', score);
-            localStorage.setItem('finalImage', lastImageSrc); // Pasar la ruta de la última imagen
-            localStorage.setItem('numPreguntas', numPreguntas); // Número de Preguntas
-            window.location.href = 'final.html';  // Redirigir a la página de resultados
+            localStorage.setItem('finalImage', lastImageSrc);
+            localStorage.setItem('numPreguntas', numPreguntas);
+            window.location.href = 'final.html';
         }
 
-        loadQuestion();  // Cargar la primera pregunta
+        loadQuestion(); // Cargar la primera pregunta
     </script>
 </body>
 
 </html>
+
+
 

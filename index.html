@@ -7,6 +7,7 @@
     <title>GokuQA - Selección de Tema</title>
     <link href="https://fonts.googleapis.com/css2?family=Bangers&display=swap" rel="stylesheet">
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
     <style>
         body {
@@ -20,56 +21,129 @@
         }
 
         .contain {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 90%;
+            max-width: 1200px;
+        }
+
+        #image-container {
+            flex: 1;
+            margin-right: 20px;
+        }
+
+        #selection-container {
+            flex: 2;
             text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
         }
 
         .goku-font {
             font-family: 'Bangers', cursive;
-            font-size: 4rem;
+            font-size: 10rem;
             color: #f39c12;
             text-shadow: 2px 2px 4px #000;
             margin-bottom: 20px;
         }
 
         .logo-goku {
-            width: 250px;
+            width: 400px;
             height: auto;
-            margin-bottom: 20px;
+        }
+
+        .button-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px; /* Espacio entre botones */
+            width: 80%;
         }
 
         button {
             font-size: 1.2rem;
-            padding: 10px 20px;
+            padding: 20px;
+            height: 180px;
+            width: 180px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background-color: #f39c12;
+            color: white;
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0px 8px 12px rgba(0, 0, 0, 0.4);
+        }
+
+        button i {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        button p {
+            margin: 0;
+            font-size: 1.2rem;
+            text-align: center;
         }
     </style>
 </head>
 
 <body>
     <div class="contain">
-        <div id="selection-container" class="text-center">
+
+        <div id="image-container">
             <img src="./img/bien 7.jpg" alt="Logo GokuQA" class="logo-goku">
+        </div>
+
+        <div id="selection-container" class="text-center">
             <h1 class="goku-font">GokuQA</h1>
             <h2>Selecciona el tema del cuestionario</h2>
-            <button class="btn btn-primary mt-3"
-                onclick="selectTopic('Modelos de pruebas de software', 'Modelos_de_pruebas_de_software')">Modelos de
-                pruebas de software</button>
-            <button class="btn btn-primary mt-3" onclick="selectTopic('Pruebas dinámicas', 'Pruebas_dinamicas')">Pruebas
-                dinámicas</button>
-            <button class="btn btn-primary mt-3" onclick="selectTopic('Pruebas estáticas', 'Pruebas_estaticas')">Pruebas
-                estáticas</button>
-            <button class="btn btn-primary mt-3" onclick="selectTopic('Caja negra', 'Caja_negra')">Caja negra</button>
-            <button class="btn btn-primary mt-3" onclick="selectTopic('Caja blanca', 'Caja_blanca')">Caja
-                blanca</button>
-            <button class="btn btn-primary mt-3" onclick="selectTopic('Caja gris', 'Caja_gris')">Caja gris</button>
+
+            <!-- Contenedor de botones -->
+            <div class="button-container">
+                <button onclick="selectTopic('Modelos de pruebas de software', 'Modelos_de_pruebas_de_software')">
+                    <i class="fas fa-cogs"></i>
+                    <p>Modelos de pruebas</p>
+                </button>
+                <button onclick="selectTopic('Pruebas dinámicas', 'Pruebas_dinamicas')">
+                    <i class="fas fa-vial"></i>
+                    <p>Pruebas dinámicas</p>
+                </button>
+                <button onclick="selectTopic('Pruebas estáticas', 'Pruebas_estaticas')">
+                    <i class="fas fa-book"></i>
+                    <p>Pruebas estáticas</p>
+                </button>
+                <button onclick="selectTopic('Caja negra', 'Caja_negra')">
+                    <i class="fas fa-box"></i>
+                    <p>Caja negra</p>
+                </button>
+                <button onclick="selectTopic('Caja blanca', 'Caja_blanca')">
+                    <i class="fas fa-box-open"></i>
+                    <p>Caja blanca</p>
+                </button>
+                <button onclick="selectTopic('Caja gris', 'Caja_gris')">
+                    <i class="fas fa-boxes"></i>
+                    <p>Caja gris</p>
+                </button>
+            </div>
         </div>
     </div>
 
     <script>
         function selectTopic(topic, questionTopic) {
             localStorage.setItem('selectedTopic', topic);  // Guardar el tema en localStorage
-            localStorage.setItem('questionTopic', questionTopic);  // Guada el nombre de la constante de las preguntas
+            localStorage.setItem('questionTopic', questionTopic);  // Guardar el nombre de la constante de las preguntas
             window.location.href = './tabs/comenzar.html';  // Redirigir a la página de comenzar
-
         }
     </script>
 </body>
