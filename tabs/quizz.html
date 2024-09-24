@@ -157,7 +157,7 @@
             <p id="progress-text">Pregunta 1 de <span id="total-questions"></span></p>
             <h1 id="question">Pregunta</h1>
             <div id="options-container"></div>
-            <button id="next-btn" class="hidden" onclick="nextQuestion()">Siguiente</button>
+            <button id="next-btn" class="hidden" onclick="loadQuestion()">Siguiente</button>
         </div>
     </div>
 
@@ -220,9 +220,6 @@
 
         let selectedAnswer = null;
 
-
-
-
         // Al cargar la página, revisar si ya hay un progreso guardado
         window.onload = function () {
             // Verificar si hay un progreso guardado de la pregunta
@@ -231,11 +228,6 @@
             // Si existe un valor guardado, usarlo para continuar desde esa pregunta
             if (savedQuestionIndex !== null) {
                 currentQuestionIndex = parseInt(savedQuestionIndex, 10);
-            }
-
-            const score = localStorage.getItem('score');
-            if (score !== null) {
-                score = parseInt(score);
             }
 
             // Verificar si hay un progreso guardado de la imagen
@@ -282,22 +274,14 @@
             imageElement.src = lastImageSrc;
 
             // Guardar el progreso en el localStorage (pregunta e imagen)
+            currentQuestionIndex++;
+            // Guardar el progreso actualizado en el localStorage (pregunta e imagen)
             localStorage.setItem('currentQuestionIndex', currentQuestionIndex);
             localStorage.setItem('imageIndex', imageIndex); // Guardar el índice de la imagen
             localStorage.setItem('lastImageSrc', lastImageSrc);
             localStorage.setItem('score', score);
 
             document.getElementById('next-btn').classList.remove('hidden');
-        }
-
-        function nextQuestion() {
-            currentQuestionIndex++;
-
-            // Guardar el progreso actualizado en el localStorage (pregunta e imagen)
-            localStorage.setItem('currentQuestionIndex', currentQuestionIndex);
-            localStorage.setItem('imageIndex', imageIndex); // Guardar el índice de la imagen
-
-            loadQuestion();
         }
 
         function showFinal() {
@@ -312,11 +296,6 @@
 
             window.location.href = 'final.html';
         }
-
-
-
-
-
 
         const imageElement = document.getElementById('question-image');
         lastImageSrc = images[imageIndex] || '../img/normal.jpg';
