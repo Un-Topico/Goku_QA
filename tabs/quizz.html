@@ -220,6 +220,40 @@
 
         let selectedAnswer = null;
 
+
+
+
+        // Al cargar la página, revisar si ya hay un progreso guardado
+        window.onload = function () {
+            // Verificar si hay un progreso guardado de la pregunta
+            const savedQuestionIndex = localStorage.getItem('currentQuestionIndex');
+
+            // Si existe un valor guardado, usarlo para continuar desde esa pregunta
+            if (savedQuestionIndex !== null) {
+                currentQuestionIndex = parseInt(savedQuestionIndex, 10);
+            }
+
+            const score = localStorage.getItem('score');
+            if (score !== null) {
+                score = parseInt(score);
+            }
+
+            // Verificar si hay un progreso guardado de la imagen
+            const savedImageIndex = localStorage.getItem('imageIndex');
+            if (savedImageIndex !== null) {
+                imageIndex = parseInt(savedImageIndex, 10); // Restaurar el índice de la imagen
+            }
+
+            // Cargar la imagen guardada
+            const savedImageSrc = localStorage.getItem('lastImageSrc');
+            if (savedImageSrc) {
+                document.getElementById('question-image').src = savedImageSrc;
+            }
+
+            // Cargar la pregunta desde donde se quedó el usuario
+            loadQuestion();
+        };
+
         function selectOption(selectedIndex, correctIndex) {
             selectedAnswer = selectedIndex;
 
@@ -247,11 +281,22 @@
             lastImageSrc = images[imageIndex] || '../img/normal.jpg';
             imageElement.src = lastImageSrc;
 
+            // Guardar el progreso en el localStorage (pregunta e imagen)
+            localStorage.setItem('currentQuestionIndex', currentQuestionIndex);
+            localStorage.setItem('imageIndex', imageIndex); // Guardar el índice de la imagen
+            localStorage.setItem('lastImageSrc', lastImageSrc);
+            localStorage.setItem('score', score);
+
             document.getElementById('next-btn').classList.remove('hidden');
         }
 
         function nextQuestion() {
             currentQuestionIndex++;
+
+            // Guardar el progreso actualizado en el localStorage (pregunta e imagen)
+            localStorage.setItem('currentQuestionIndex', currentQuestionIndex);
+            localStorage.setItem('imageIndex', imageIndex); // Guardar el índice de la imagen
+
             loadQuestion();
         }
 
@@ -259,8 +304,25 @@
             localStorage.setItem('finalScore', score);
             localStorage.setItem('finalImage', lastImageSrc);
             localStorage.setItem('numPreguntas', numPreguntas);
+
+            // Limpiar el progreso guardado al finalizar
+            localStorage.removeItem('currentQuestionIndex');
+            localStorage.removeItem('imageIndex'); // Limpiar el índice de la imagen
+            localStorage.removeItem('lastImageSrc');
+
             window.location.href = 'final.html';
         }
+
+
+
+
+
+
+        const imageElement = document.getElementById('question-image');
+        lastImageSrc = images[imageIndex] || '../img/normal.jpg';
+        imageElement.src = lastImageSrc;
+
+        document.getElementById('next-btn').classList.remove('hidden');
 
         loadQuestion();
     </script>

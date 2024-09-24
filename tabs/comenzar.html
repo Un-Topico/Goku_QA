@@ -61,6 +61,11 @@
         document.getElementById('quiz-name').innerText = `Cuestionario sobre ${selectedTopic}`;
 
         function startQuiz() {
+            // Limpiar el progreso guardado al finalizar
+            localStorage.removeItem('currentQuestionIndex');
+            localStorage.removeItem('imageIndex'); // Limpiar el índice de la imagen
+            localStorage.removeItem('lastImageSrc');
+            localStorage.removeItem('score');
             window.location.href = './quizz.html';  // Redirigir a la página del quiz
         }
     </script>
