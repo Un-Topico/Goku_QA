@@ -73,23 +73,32 @@
 
 <body>
     <div id="final-container">
-        
         <div id="image-container">
             <img id="final-image" src="../img/normal.jpg" alt="Imagen final">
         </div>
 
         <h1>Resultado Final</h1>
         <p id="final-score"></p>
-        <button onclick="retryQuiz()">Reintentar</button>
+        <button onclick="retryQuiz()">Menú Principal</button>
     </div>
 
     <script>
-        // Obtener el puntaje final desde localStorage
-        const finalScore = localStorage.getItem('finalScore');
-        const finalImage = localStorage.getItem('finalImage');
-        const numPreguntas = localStorage.getItem('numPreguntas');
-        document.getElementById('final-score').innerText = `Puntuación:  ${finalScore} / ${numPreguntas}`;
-        document.getElementById('final-image').src = finalImage;
+        let score = parseInt(localStorage.getItem('score'), 10);
+        const lastImageSrc = localStorage.getItem('lastImageSrc');
+        const numPreguntas = localStorage.getItem('numPreguntas') || '0';
+
+        if (isNaN(score)) {
+            score = 10;  // Valor por defecto si score es inválido
+        }
+
+        document.getElementById('final-score').innerText = `Puntuación: ${score} / ${numPreguntas}`;
+
+        if (lastImageSrc) {
+            document.getElementById('final-image').src = lastImageSrc;
+        } else {
+            document.getElementById('final-image').src = '../img/normal.jpg';  // Imagen por defecto
+            console.log("No jaló la imagen");
+        }
 
         function retryQuiz() {
             window.location.href = '../index.html';  // Volver a la selección de tema

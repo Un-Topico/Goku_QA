@@ -247,6 +247,7 @@
         };
 
         function selectOption(selectedIndex, correctIndex) {
+            score = localStorage.getItem('score');
             selectedAnswer = selectedIndex;
 
             const options = document.querySelectorAll('.option');
@@ -285,14 +286,11 @@
         }
 
         function showFinal() {
-            localStorage.setItem('finalScore', score);
-            localStorage.setItem('finalImage', lastImageSrc);
             localStorage.setItem('numPreguntas', numPreguntas);
 
             // Limpiar el progreso guardado al finalizar
             localStorage.removeItem('currentQuestionIndex');
-            localStorage.removeItem('imageIndex'); // Limpiar el índice de la imagen
-            localStorage.removeItem('lastImageSrc');
+            localStorage.removeItem('imageIndex'); // Limpiar el índice de la imagen;
 
             window.location.href = 'final.html';
         }

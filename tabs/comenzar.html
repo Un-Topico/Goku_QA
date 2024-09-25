@@ -65,7 +65,8 @@
             localStorage.removeItem('currentQuestionIndex');
             localStorage.removeItem('imageIndex'); // Limpiar el índice de la imagen
             localStorage.removeItem('lastImageSrc');
-            localStorage.removeItem('score');
+            let score = 0;
+            localStorage.setItem('score', score);
             window.location.href = './quizz.html';  // Redirigir a la página del quiz
         }
     </script>
