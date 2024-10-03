@@ -19,7 +19,7 @@ const images = [
     "../img/bien 4.jpg",     // posición 14
     "../img/bien 5.jpg",     // posición 15
     "../img/bien 6.jpg",     // posición 16
-    "../img/bien 7.jpg",     // posición 17
+    "../img/bien 8.jpg",     // posición 17
     "../img/bien 9.jpg",     // posición 18
     "../img/bien 10.jpg",     // posición 19
 ];
